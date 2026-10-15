@@ -1,0 +1,63 @@
+Run started:2026-10-15 17:08:32.347282+00:00
+
+Test results:
+>> Issue: [B404:blacklist] Consider possible security implications associated with the subprocess module.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess
+   Location: ./app.py:4:0
+3	import sqlite3
+4	import subprocess
+5	import ipaddress
+
+--------------------------------------------------
+>> Issue: [B607:start_process_with_partial_path] Starting a process with a partial executable path
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b607_start_process_with_partial_path.html
+   Location: ./app.py:42:17
+41	    try:
+42	        result = subprocess.run(
+43	            ["ping", "-c", "1", host],
+44	            capture_output=True,
+45	            text=True,
+46	            timeout=5,
+47	            check=False
+48	        )
+49	        output = result.stdout + result.stderr
+
+--------------------------------------------------
+>> Issue: [B603:subprocess_without_shell_equals_true] subprocess call - check for execution of untrusted input.
+   Severity: Low   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b603_subprocess_without_shell_equals_true.html
+   Location: ./app.py:42:17
+41	    try:
+42	        result = subprocess.run(
+43	            ["ping", "-c", "1", host],
+44	            capture_output=True,
+45	            text=True,
+46	            timeout=5,
+47	            check=False
+48	        )
+49	        output = result.stdout + result.stderr
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 45
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 3
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 3
+Files skipped (0):
